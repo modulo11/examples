@@ -27,16 +27,17 @@ module.exports = {
 async function onList(storage, event) {
   try {
     return await storage.getAll();
-  } catch(err) {
+  } catch (err) {
     event.extensions.response.status(500);
     return;
   }
 }
 
 async function onCreate(storage, event) {
+  console.log("Incoming event: " + event)
   try {
     await storage.set(event.data);
-  } catch(err) {
+  } catch (err) {
     let status = 500;
     switch (err) {
       case errors.codeRequired: {
